@@ -24,19 +24,49 @@ for rowno in range(2,4324):
 
 for k in range(len(npl)):
     tname = npl[k]['lname']
+    reg = r',([^,]*' + tname + r'[^,]*),'
     try:
-        page = int(npl[k]['pages'][0])
-        tpage = str(pdflist[page-1])
-        reg = r'.{0,20}' + tname + r'.{0,20}'
-        exps = re.findall(reg,tpage)
-        pi.cell(row = k+2, column = 9).value = exps[0]
+        page1 = int(npl[k]['pages'][0])
+        tpage1 = str(pdflist[page1-1]).replace('\n',',')
+        exps1 = re.findall(reg,tpage1)
         try:
-            pi.cell(row = k+2, column = 10).value = exps[1]
-            pi.cell(row = k+2, column = 11).value = exps[2]
-            pi.cell(row = k+2, column = 12).value = str(exps[3:])
+            page2 = int(npl[k]['pages'][1])
+            tpage2 = str(pdflist[page2-1]).replace('\n',',')
+            exps2 = re.findall(reg,tpage2)
+            try:
+                pi.cell(row = k+2, column = 9).value = exps1[0]
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 10).value = exps2[0]
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 11).value = str(exps1[1:])
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 12).value = str(exps2[1:])
+            except:
+                ok
         except:
-            l +=1
-        print tname + ': ' + exps[0]
+            try:
+                pi.cell(row = k+2, column = 9).value = exps1[0]
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 10).value = exps1[1]
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 11).value = exps1[2]
+            except:
+                ok
+            try:
+                pi.cell(row = k+2, column = 12).value = str(exps1[3:])
+            except:
+                ok
+        print tname + ': ' + exps1[0]
     except:
         print tname
         
