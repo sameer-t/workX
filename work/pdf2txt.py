@@ -16,7 +16,7 @@ from pdfminer.layout import LAParams, LTTextBox, LTTextLine, LTFigure, LTImage
 
 
 # Open a PDF file.
-fp = open('/home/sameer/2009.pdf', 'rb')
+fp = open('/home/sameer/2008.pdf', 'rb')
 # Create a PDF parser object associated with the file object.
 parser = PDFParser(fp)
 # Create a PDF document object that stores the document structure.
